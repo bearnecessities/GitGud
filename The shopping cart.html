@@ -1,0 +1,106 @@
+<script>
+var item = function(itemName, itemPrice, itemTax)
+ {
+  this.products = itemName;
+  this.cost = itemPrice;
+  this.taxes = itemTax;
+  this.total = itemPrice + (itemPrice * itemTax);
+};
+
+var list = [];
+var totalAmount = 0;
+
+list[0] = new item("Shoes", 67.99, .075);
+list[1] = new item("Coat", 78.99, .075);
+list[2] = new item("Book", 9.99, .075);
+list[3] = new item("Suitcase", 56.99, .075);
+
+function theStore() 
+{
+  var greeting = prompt("Welcome to D&D Apparel! Do you want to begin shopping? Yes or No");
+
+  //add stuff to cart
+  while (greeting === "Yes") {
+
+    for (var i = 0; i < list.length; i++) 
+    {
+      var j = list[i];
+      var adding = prompt("The " + j.products + " cost " + j.cost + ". Would you like to add it to your cart? Yes or No");
+      if (adding === "Yes") 
+      {
+        var addingMore = prompt("How much do you want?");
+        if (addingMore < 1) 
+        {
+          alert("This item was not added to your cart.");
+        } 
+        else 
+        {
+          var subTotal = addingMore * (j.cost);
+          totalAmount += subTotal;
+          alert(addingMore + " of " + j.products + " has been added to your cart." + " Your total for this kind of item is " + subTotal.toString() + ".");
+        }
+      } 
+      else   
+      {
+        alert(j.products + " was not added to your cart.");
+      }
+    }
+
+    greeting = "No" 
+
+        
+  }
+
+     
+        
+    var goingOn = prompt("Do you want to continue shopping? Yes or No");
+      while (goingOn === "Yes")
+      {
+           var newItem = prompt("Type the item that you wish to add to your cart.")
+           for (var i = 0; i < list.length; i++) {
+          var j = list[i];
+            if (newItem === j.products) {
+              totalAmount = totalAmount + (j.cost);
+              list.push(i, 1);
+              break;
+            }
+            else
+            {
+             alert("Item entered is invalid.")
+            }
+            
+}
+    var goingOn = prompt("You new total is " + totalAmount + ". Do you want to continue shopping? Yes or No");
+}
+
+
+
+      var totaling = prompt("Your total amount is: " + totalAmount + " (tax included). Do you wish to remove an item? Yes or No");
+      while (totaling === "Yes") 
+        {
+          var remove = prompt("Which item do you want to remove? If you have no items that you wish to remove, hit 'cancel'.")
+       for (var i = 0; i < list.length; i++) {
+          var j = list[i];
+          if (remove === j.products) {        
+            totalAmount = totalAmount - (j.cost);
+             list.splice(i, 1);
+             break;
+          }
+       }
+        
+        totaling = prompt("Do you want to remove another item? Yes or No");
+      }
+  
+      alert("Your new total amount is " + totalAmount);
+      if (totalAmount > 100) 
+      {
+          alert("Your total is " + totalAmount + " (tax included). You can pay with credit card or cash.");
+      } 
+      else 
+      {
+         alert("You total is " + totalAmount + " (tax included). You must pay with cash.");
+      }
+  }
+
+theStore();
+</script>
